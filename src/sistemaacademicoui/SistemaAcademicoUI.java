@@ -5,6 +5,12 @@
  */
 package sistemaacademicoui;
 
+import facade.FacadeCurso;
+import javax.swing.ComboBoxModel;
+import model.Curso;
+import model.Modalidade;
+import swing.model.ModalidadeComboBoxModel;
+
 /**
  *
  * @author everaldo
@@ -33,10 +39,10 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         cursosTabela = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         nomeLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nomeCursoTextField = new javax.swing.JTextField();
         modalidadeLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        modalidadeComboBox = new javax.swing.JComboBox<>();
+        inserirCursoButton = new javax.swing.JButton();
         painelAlunos = new javax.swing.JPanel();
         painelMaterias = new javax.swing.JPanel();
         painelMatriculas = new javax.swing.JPanel();
@@ -72,9 +78,15 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
 
         modalidadeLabel.setText("Modalidade:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modalidadeComboBox.setModel(new ModalidadeComboBoxModel());
+        modalidadeComboBox.setSelectedIndex(0);
 
-        jButton1.setText("Inserir");
+        inserirCursoButton.setText("Inserir");
+        inserirCursoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inserirCursoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,10 +99,10 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
                     .addComponent(nomeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jComboBox1, 0, 260, Short.MAX_VALUE))
+                    .addComponent(nomeCursoTextField)
+                    .addComponent(modalidadeComboBox, 0, 260, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(inserirCursoButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,12 +111,12 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeLabel)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(nomeCursoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inserirCursoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(modalidadeLabel)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modalidadeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -198,6 +210,15 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inserirCursoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirCursoButtonActionPerformed
+        System.out.println(nomeCursoTextField.getText());
+        System.out.println(modalidadeComboBox.getSelectedItem());
+        String nomeCurso = nomeCursoTextField.getText();
+        Modalidade modalidade = (Modalidade) modalidadeComboBox.getSelectedItem();
+        Curso novoCurso = new Curso(nomeCurso, modalidade);
+        FacadeCurso.inserir(novoCurso);
+    }//GEN-LAST:event_inserirCursoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,17 +254,18 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable cursosTabela;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton inserirCursoButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenuBar menuPrincipal;
+    private javax.swing.JComboBox<Modalidade> modalidadeComboBox;
     private javax.swing.JLabel modalidadeLabel;
+    private javax.swing.JTextField nomeCursoTextField;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JPanel painelAlunos;
     private javax.swing.JPanel painelCursos;
