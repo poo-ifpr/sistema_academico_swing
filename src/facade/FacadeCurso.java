@@ -35,4 +35,9 @@ public class FacadeCurso {
 		cursoDAO.inserir(novoCurso);
 		return novoCurso;
 	}
+        
+        public static List<Curso> listarTodos(){
+            CursoDAO cursoDAO = new CursoDAO();
+            return cursoDAO.listar();
+        }
 }

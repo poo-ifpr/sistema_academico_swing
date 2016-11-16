@@ -9,6 +9,7 @@ import facade.FacadeCurso;
 import javax.swing.ComboBoxModel;
 import model.Curso;
 import model.Modalidade;
+import swing.model.CursosTableModel;
 import swing.model.ModalidadeComboBoxModel;
 
 /**
@@ -21,6 +22,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
      * Creates new form SistemaAcademicoUI
      */
     public SistemaAcademicoUI() {
+        cursosTableModel = new CursosTableModel(FacadeCurso.listarTodos());
         initComponents();
     }
 
@@ -53,25 +55,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Acadêmico");
 
-        cursosTabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Id", "Nome", "Modalidade", "Ações"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        cursosTabela.setModel(cursosTableModel);
         jScrollPane1.setViewportView(cursosTabela);
 
         nomeLabel.setText("Nome:");
@@ -217,6 +201,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         Modalidade modalidade = (Modalidade) modalidadeComboBox.getSelectedItem();
         Curso novoCurso = new Curso(nomeCurso, modalidade);
         FacadeCurso.inserir(novoCurso);
+        cursosTableModel.setCursos(FacadeCurso.listarTodos());
     }//GEN-LAST:event_inserirCursoButtonActionPerformed
 
     /**
@@ -254,7 +239,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         });
     }
 
-    
+    private CursosTableModel cursosTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable cursosTabela;
     private javax.swing.JButton inserirCursoButton;
