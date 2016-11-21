@@ -7,7 +7,7 @@ package ui;
 
 import facade.FacadeCurso;
 import java.awt.Point;
-import javax.swing.ComboBoxModel;
+import java.util.List;
 import javax.swing.JTable;
 import model.Curso;
 import model.Modalidade;
@@ -26,6 +26,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
     public SistemaAcademicoUI() {
         cursosTableModel = new CursosTableModel(FacadeCurso.listarTodos());
         initComponents();
+        atualizarTabela();
     }
 
     /**
@@ -39,7 +40,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
 
         painelPrincipal = new javax.swing.JTabbedPane();
         painelCursos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        cursosScrollPanelTabela = new javax.swing.JScrollPane();
         cursosTabela = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         nomeLabel = new javax.swing.JLabel();
@@ -63,7 +64,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
                 cursosTabelaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(cursosTabela);
+        cursosScrollPanelTabela.setViewportView(cursosTabela);
 
         nomeLabel.setText("Nome:");
 
@@ -118,7 +119,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
             .addGroup(painelCursosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+                    .addComponent(cursosScrollPanelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -128,7 +129,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cursosScrollPanelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -264,17 +265,23 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
     }
     
     public void atualizarTabela(){
-         cursosTableModel.setCursos(FacadeCurso.listarTodos());
+        List<Curso> cursos = FacadeCurso.listarTodos();
+        boolean visibilidadeTabela = cursos.size() > 0;
+        cursosScrollPanelTabela.setVisible(visibilidadeTabela);
+        cursosTableModel.setCursos(cursos);
+        //Redesenha a tela, senão é necessário clicar em algum lugar
+        getContentPane().repaint();
+        
     }
 
     private CursosTableModel cursosTableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane cursosScrollPanelTabela;
     private javax.swing.JTable cursosTabela;
     private javax.swing.JButton inserirCursoButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JComboBox<Modalidade> modalidadeComboBox;
     private javax.swing.JLabel modalidadeLabel;

@@ -47,6 +47,7 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
         cursoNomeTextField = new javax.swing.JTextField();
         cursoModalidadeLabel = new javax.swing.JLabel();
         modalidadeComboBox = new javax.swing.JComboBox<>();
+        excluirBotao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,6 +79,13 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
         modalidadeComboBox.setModel(new ModalidadeComboBoxModel());
         modalidadeComboBox.setSelectedIndex(curso.getModalidade().ordinal());
 
+        excluirBotao.setText("excluir");
+        excluirBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluirBotaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,10 +98,12 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 188, Short.MAX_VALUE)
+                                .addGap(0, 205, Short.MAX_VALUE)
                                 .addComponent(alterarBotao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelarBotao))
+                                .addComponent(cancelarBotao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(excluirBotao))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(modalidadeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -123,7 +133,8 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(alterarBotao)
-                            .addComponent(cancelarBotao))
+                            .addComponent(cancelarBotao)
+                            .addComponent(excluirBotao))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,6 +178,14 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
         fecharTela();
     }//GEN-LAST:event_alterarBotaoActionPerformed
 
+    private void excluirBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBotaoActionPerformed
+        //Se não fizer a busca antes de remover retorna Dettached instance ERROR
+        Curso removerCurso = FacadeCurso.buscarPorId(curso.getId());
+        FacadeCurso.remover(removerCurso);
+        telaPrincipal.atualizarTabela();
+        fecharTela();
+    }//GEN-LAST:event_excluirBotaoActionPerformed
+
     private void fecharTela(){
         //LEMBRE-SE de trocar EXIT ON CLOSE PARA DISPOSE :-)
         setVisible(false);
@@ -188,6 +207,7 @@ public class AtualizarCursoUI extends javax.swing.JFrame {
     private javax.swing.JLabel cursoModalidadeLabel;
     private javax.swing.JLabel cursoNomeLabel;
     private javax.swing.JTextField cursoNomeTextField;
+    private javax.swing.JButton excluirBotao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<Modalidade> modalidadeComboBox;
     // End of variables declaration//GEN-END:variables

@@ -61,10 +61,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="0" pref="188" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="205" max="32767" attributes="0"/>
                                   <Component id="alterarBotao" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cancelarBotao" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="excluirBotao" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="modalidadeComboBox" min="-2" pref="188" max="-2" attributes="0"/>
@@ -107,6 +109,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="alterarBotao" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cancelarBotao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="excluirBotao" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -177,6 +180,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Modalidade&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="excluirBotao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="excluir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirBotaoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
