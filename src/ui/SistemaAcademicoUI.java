@@ -208,7 +208,7 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         Modalidade modalidade = (Modalidade) modalidadeComboBox.getSelectedItem();
         Curso novoCurso = new Curso(nomeCurso, modalidade);
         FacadeCurso.inserir(novoCurso);
-        cursosTableModel.setCursos(FacadeCurso.listarTodos());
+        atualizarTabela();
     }//GEN-LAST:event_inserirCursoButtonActionPerformed
 
     private void cursosTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cursosTabelaMouseClicked
@@ -220,6 +220,11 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
             curso.setId((long) tabela.getModel().getValueAt(linhaTabela, 0));
             curso.setNome((String) tabela.getModel().getValueAt(linhaTabela, 1));
             curso.setModalidade((Modalidade) tabela.getModel().getValueAt(linhaTabela, 2));
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new AtualizarCursoUI(SistemaAcademicoUI.this, curso).setVisible(true);
+                }
+            });
         }
     }//GEN-LAST:event_cursosTabelaMouseClicked
 
@@ -256,6 +261,10 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
                 new SistemaAcademicoUI().setVisible(true);
             }
         });
+    }
+    
+    public void atualizarTabela(){
+         cursosTableModel.setCursos(FacadeCurso.listarTodos());
     }
 
     private CursosTableModel cursosTableModel;
