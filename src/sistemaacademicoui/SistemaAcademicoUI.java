@@ -6,7 +6,9 @@
 package sistemaacademicoui;
 
 import facade.FacadeCurso;
+import java.awt.Point;
 import javax.swing.ComboBoxModel;
+import javax.swing.JTable;
 import model.Curso;
 import model.Modalidade;
 import swing.model.CursosTableModel;
@@ -56,6 +58,11 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         setTitle("Sistema Acadêmico");
 
         cursosTabela.setModel(cursosTableModel);
+        cursosTabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cursosTabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(cursosTabela);
 
         nomeLabel.setText("Nome:");
@@ -203,6 +210,18 @@ public class SistemaAcademicoUI extends javax.swing.JFrame {
         FacadeCurso.inserir(novoCurso);
         cursosTableModel.setCursos(FacadeCurso.listarTodos());
     }//GEN-LAST:event_inserirCursoButtonActionPerformed
+
+    private void cursosTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cursosTabelaMouseClicked
+        JTable tabela = (JTable) evt.getSource();
+        Point pontoClique = evt.getPoint();
+        int linhaTabela = tabela.rowAtPoint(pontoClique);
+        if(linhaTabela != -1 && evt.getClickCount() == 2){
+            Curso curso = new Curso();
+            curso.setId((long) tabela.getModel().getValueAt(linhaTabela, 0));
+            curso.setNome((String) tabela.getModel().getValueAt(linhaTabela, 1));
+            curso.setModalidade((Modalidade) tabela.getModel().getValueAt(linhaTabela, 2));
+        }
+    }//GEN-LAST:event_cursosTabelaMouseClicked
 
     /**
      * @param args the command line arguments
